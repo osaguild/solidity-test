@@ -26,8 +26,13 @@ contract Mortal is Owned {
 }
 
 contract Faucet is Mortal {
+    event Withdrawal(address indexed to, uint amount);
+    event Deposit(address indexed from, uint amount);
+    
     // Accept any incoming amount
-    receive() external payable {}
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value);
+    }
 
     // Give out ether to anyone who asks
     function withdraw(uint withdraw_amount) public {
@@ -41,5 +46,7 @@ contract Faucet is Mortal {
 
         // Send the amount to the address that requested it
         msg.sender.transfer(withdraw_amount);
+
+        emit Withdrawal(msg.sender, withdraw_amount);
     }
 }
