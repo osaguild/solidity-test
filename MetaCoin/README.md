@@ -53,8 +53,8 @@ MetaCoin is truffle boxes project
 ## check ganache
 - you can check your local block chain like this
   - accounts
-    - ![accounts](./image/accounts.png)
+    - ![accounts](./images/accounts.png)
   - blocks
-    - ![blocks](./image/blocks.png)
+    - ![blocks](./images/blocks.png)
   - transactions
-    - ![transactions](./image/transactions.png)
+    - ![transactions](./images/transactions.png)
