@@ -1,0 +1,27 @@
+{
+  "name": "solidity-test",
+  "version": "1.0.0",
+  "description": "test for solidity",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osaguild/solidity-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osaguild/solidity-test/issues"
+  },
+  "homepage": "https://github.com/osaguild/solidity-test#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "ethereumjs-wallet": "^1.0.2",
+    "truffle-wallet-provider": "^0.0.5"
+  }
+}
