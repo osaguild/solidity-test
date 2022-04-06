@@ -6,7 +6,7 @@
 - ABI (Application Binary Interface)
   - `solc --abi hoge.sol`
 
-## 3 major context
+## 4 major context
 
 ### msg
 - Transaction Call form EOA and Message Call from Contract
@@ -29,13 +29,6 @@
   - `balance transfer(amount) send(amount) call(payload) delegatecall() `
 
 ## truffle
-- install nvm
-  - `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash`
-  - `source ~/.zshrc`
-  - `nvm install --list`
-- set node
-  - `node -v > .nvmrc`
-  - `nvm install`
 - install truffle
   - `npm -g install truffle`
   - `truffle version`
@@ -45,36 +38,23 @@
   - ```
     module.exports = {
       networks: {
-        localnode: {
-          network_id: "*",
-          host: "localhost",
-          port: 8545,
+        development: {
+          host: "127.0.0.1",
+          port: 7545,
+          network_id: "*"
         }
       },
       compilers: {
-      solc: {
+        solc: {
           version: "0.6.12"
         }
       }
     };
     ```
-- init npm
-  - `npm init`
-- install package
-  - `npm install dotenv truffle-wallet-provider ethereumjs-wallet`
-- move solidity file to contracts
-  - ex) `contracts/Faucet.sol`
 - comile
   - `truffle compile`
-- deploy script
-  - file is `/migrations/2_deploy_contracts.js`
-  - ```
-    const Faucet = artifacts.require("Faucet");
-    
-    module.exports = function (deployer) {
-      deployer.deploy(Faucet);
-    };
-    ```
+- launch ganache
+  - click ganache in your applications 
 - deploy
-  - `truffle migrate --network localnode`
-  - 
+  - `truffle migrate --network development`
+  
