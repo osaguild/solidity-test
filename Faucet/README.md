@@ -106,4 +106,14 @@
       ```
     - your default port is 9545, not private network
     - put `migrate`, you can deploy your contract on ganache
-  
+
+## Faucet2.sol script
+- on local network
+  - `truffle develop`
+  - `compile`
+  - `migrate`
+- run script
+  - `Faucet.deployed().then(i => {FaucetDeployed = i})`
+  - `FaucetDeployed.send(web3.utils.toWei('1', 'ether')).then(res => { console.log(res) })`
+  - `FaucetDeployed.withdraw(web3.utils.toWei('0.1', "ether")).then(res => { console.log(res) })`
+  - 

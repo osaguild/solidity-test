@@ -25,7 +25,7 @@ contract Mortal is Owned {
     }
 }
 
-contract Faucet is Mortal {
+contract Faucet2 is Mortal {
     event Withdrawal(address indexed to, uint amount);
     event Deposit(address indexed from, uint amount);
     
