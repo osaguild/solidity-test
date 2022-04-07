@@ -1,17 +1,15 @@
-const HelloWorldContract = artifacts.require("HelloWorld");
- 
-contract("HelloWorld", () => {
-  it("has been deployed successfully", async () => {
-      const hello = await HelloWorldContract.deployed();
-      assert(hello, "contract was not deployed");
-  });
- 
-    describe("sayHello()", () => {
-        it("returns 'Hello World'", async () => {
-            const hello = await HelloWorldContract.deployed();
-            const expected = "Hello World";
-            const actual = await hello.sayHello();
-            assert.equal(actual, expected, "Hello World");
-        });
+const HelloWorld = artifacts.require('HelloWorld');
+
+contract('HelloWorld', () => {
+    it('check deploy', async () => {
+        const helloWorldInstance = await HelloWorld.deployed();
+
+        assert(helloWorldInstance, "HelloWorld contract was not deployed");
+    });
+    it('check sayHello()', async () => {
+        const hello = await HelloWorld.deployed();
+        const sayHello = await hello.sayHello();
+
+        assert.equal(sayHello, 'Hello World', "HelloWorld.sayHello() returned unexpected value");
     });
 });
