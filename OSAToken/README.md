@@ -29,3 +29,9 @@ test for token sample is METoken
   - `OSAToken.deployed().then(instance=>{instance.totalSupply().then(totalSupply=>{console.log(totalSupply)})})`
 - balance of owner
   - `OSAToken.deployed().then(instance=>{instance.balanceOf(accounts[0]).then(balance=>{console.log(balance)})})`
+- name
+  - `OSAToken.deployed().then(instance=>{instance.name().then(name=>{console.log(name)})})`
+- symbol
+  - `OSAToken.deployed().then(instance=>{instance.symbol().then(symbol=>{console.log(symbol)})})`
+- decimals
+  - `OSAToken.deployed().then(instance=>{instance.decimals().then(decimal=>{console.log(decimal)})})`
