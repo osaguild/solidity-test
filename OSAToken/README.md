@@ -22,6 +22,7 @@ test for token sample is METoken
 - `compile`
 - `migrate`
 ### test
+- ERC20 methods is [here](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol)
 - contract address
   - `OSAToken.address`
 - total supply
