@@ -7,4 +7,5 @@ contract OSAToken is ERC20 {
   constructor(uint256 initialSupply) ERC20('OSA Token', 'OSA') {
     _mint(msg.sender, initialSupply);
   }
+  receive() external payable {}
 }
