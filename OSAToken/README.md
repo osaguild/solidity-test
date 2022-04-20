@@ -16,7 +16,7 @@ OSAToken is ERC20 base token.
 ### create OSAToken.sol
 - [sample code](https://docs.openzeppelin.com/contracts/4.x/erc20)
 - i need just constructor is spcified initial supply
-### create 2_deploy_osatoken.js
+### create 2_deploy_contract.js
 - specify 100 initial supply
 ### compile and deploy at local
 - `truffle develop`
@@ -43,8 +43,8 @@ OSAFaucet is faucet of OSAToken. you can get OSAToken through OSAFaucet if you p
 ### create OSAFaucet.sol
 - constructer set OSAToken as ERC20 token and address of owner is accounts[0]
 - contract has withdraw method. you can get OSAToken if you pay ETH.
-### create 3_deploy_osafaucet.js
-- get and set OSAFaucet and owner address 
+### edit 2_deploy_contract.js
+- add deploy OSAFaucet
 ### compile and deploy at local
 - `truffle develop`
 - `compile`
