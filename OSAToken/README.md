@@ -2,7 +2,7 @@
 test for token sample is METoken
 
 
-## create OSA contrack
+## create OSA contract
 ### set up
 - `mkdir OSAToken`
 - `cd OSAToken`
