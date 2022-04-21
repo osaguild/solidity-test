@@ -12,11 +12,11 @@ contract OSAFaucet {
         OSATokenOwner = _OSATokenOwner;
     }
 
-    function withdraw(uint256 osa_amount) public {
-        require(osa_amount <= 10);
+    function withdraw(uint256 _OSAAmount) public {
+        require(_OSAAmount <= 10);
 
-        OSAToken.transferFrom(OSATokenOwner, msg.sender, osa_amount);
+        OSAToken.transferFrom(OSATokenOwner, msg.sender, _OSAAmount);
     }
-    
+
     receive() external payable {}
 }

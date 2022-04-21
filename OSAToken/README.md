@@ -90,3 +90,25 @@ OSAFaucet is faucet of OSAToken. you can get OSAToken through OSAFaucet if you p
     - `OSAFaucet.deployed().then(instance=>{instance.withdraw(12.1,{from:accounts[1]})})`
   - withdraw 12 OSA -> ok
     - `OSAFaucet.deployed().then(instance=>{instance.withdraw(12,{from:accounts[1]})})`
+
+
+## add mint to OSAToken
+increase OSA total supply
+### edit OSAToken
+add increase method that mint OSA
+### compile and deploy at local
+- `truffle develop`
+- `compile`
+- `migrate`
+### test mint OSA
+- check total supply
+  - `OSAToken.deployed().then(instance=>{instance.totalSupply().then(totalSupply=>{console.log(totalSupply)})})`
+- mint OSA
+  - `OSAToken.deployed().then(instance=>{instance.increase(10)})`
+- check total supply
+  - `OSAToken.deployed().then(instance=>{instance.totalSupply().then(totalSupply=>{console.log(totalSupply)})})`
+- transfer 110 OSA
+  - `OSAToken.deployed().then(instance=>{instance.transfer(accounts[1],110)})`
+- balance of OSA ...
+  - owner : `OSAToken.deployed().then(instance=>{instance.balanceOf(accounts[0]).then(balance=>{console.log(balance)})})`
+  - account[1] : `OSAToken.deployed().then(instance=>{instance.balanceOf(accounts[1]).then(balance=>{console.log(balance)})})`
