@@ -112,3 +112,22 @@ add increase method that mint OSA
 - balance of OSA ...
   - owner : `OSAToken.deployed().then(instance=>{instance.balanceOf(accounts[0]).then(balance=>{console.log(balance)})})`
   - account[1] : `OSAToken.deployed().then(instance=>{instance.balanceOf(accounts[1]).then(balance=>{console.log(balance)})})`
+
+
+## add event
+add event to all contract method
+### edit OSAToken
+- OSAFaucet
+  - add Withdraw
+- OSAToken
+  - add Mint
+### compile and deploy at local
+- `truffle develop`
+- `compile`
+- `migrate`
+### test mint OSA
+- call OSAFaucet Withdraw event
+  - `OSAToken.deployed().then(instance=>{instance.approve(OSAFaucet.address,10)})`
+  - `OSAFaucet.deployed().then(instance=>{instance.withdraw(5,{from:accounts[1]})})`
+- call OSAToken Mint event
+  - `OSAToken.deployed().then(instance=>{instance.increase(10)})`
