@@ -5,7 +5,7 @@ import "./DeedRepository.sol";
 
 contract AuctionRepository {
     Auction[] public auctions;
-    mapping(address=>uint[]) public auctionOwner;
+    mapping(address => uint256[]) public auctionOwner;
 
     struct Auction {
         string name;
@@ -27,7 +27,7 @@ contract AuctionRepository {
         uint256 _startPrice,
         uint256 _blockDeadline
     ) public returns (bool) {
-        uint auctionId = auctions.length;
+        uint256 auctionId = auctions.length;
         Auction memory newAuction;
         newAuction.name = _auctionTitle;
         newAuction.blockDeadline = _blockDeadline;
@@ -41,7 +41,10 @@ contract AuctionRepository {
 
         auctions.push(newAuction);
         auctionOwner[msg.sender].push(auctionId);
-        
+
+        emit AuctionCreated(msg.sender, auctionId);
         return true;
     }
+
+    event AuctionCreated(address _owner, uint256 _auctionId);
 }
