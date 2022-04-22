@@ -19,6 +19,22 @@ contract AuctionRepository {
         bool finalized;
     }
 
+    modifier contractIsDeedOwner(
+        address _deedRepositoryAddress,
+        uint256 _deedId
+    ) {
+        address deedOwner = DeedRepository(_deedRepositoryAddress).ownerOf(
+            _deedId
+        );
+
+        require(deedOwner == msg.sender, "error");
+        /* todo: origin logic is below
+        emit Debug(deedOwner, address(this));
+        require(deedOwner == address(this), "error");
+        */
+        _;
+    }
+
     function createAuction(
         address _deedRepositoryAddress,
         uint256 _deedId,
@@ -26,7 +42,11 @@ contract AuctionRepository {
         string memory _metadata,
         uint256 _startPrice,
         uint256 _blockDeadline
-    ) public returns (bool) {
+    )
+        public
+        contractIsDeedOwner(_deedRepositoryAddress, _deedId)
+        returns (bool)
+    {
         uint256 auctionId = auctions.length;
         Auction memory newAuction;
         newAuction.name = _auctionTitle;
@@ -47,4 +67,5 @@ contract AuctionRepository {
     }
 
     event AuctionCreated(address _owner, uint256 _auctionId);
+    //event Debug(address _deedOwner, address _this);
 }

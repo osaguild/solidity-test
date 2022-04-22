@@ -29,5 +29,7 @@
 - [sample code](https://docs.openzeppelin.com/contracts/4.x/erc721)
 - edit 2_deploy_contract.js
 ### test
+- call registerDeed
+  - `DeedRepository.deployed().then(instance=>{instance.registerDeed(001, "https://001.com/").then(event=>{console.log(event)})})`
 - call createAuction
-  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(AuctionRepository.address,1,"sample auction","hello auction",100,200).then(res=>{console.log(res)})})`
+  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,001,"sample auction","hello auction",100,200).then(res=>{console.log(res)})})` 
