@@ -21,3 +21,13 @@
   - `DeedRepository.deployed().then(instance=>{instance.balanceOf(accounts[0]).then(balance=>{console.log(balance)})})`
   - `DeedRepository.deployed().then(instance=>{instance.ownerOf(12345).then(owner=>{console.log(owner)})})`
   - `DeedRepository.deployed().then(instance=>{instance.tokenURI(12345).then(uri=>{console.log(uri)})})`
+
+## create AuctionRepository.sol
+### develop
+- `truffle create contract AuctionRepository`
+- edit AuctionRepository.sol
+- [sample code](https://docs.openzeppelin.com/contracts/4.x/erc721)
+- edit 2_deploy_contract.js
+### test
+- call createAuction
+  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(AuctionRepository.address,1,"sample auction","hello auction",100,200).then(res=>{console.log(res)})})`
