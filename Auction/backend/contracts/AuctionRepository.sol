@@ -35,6 +35,19 @@ contract AuctionRepository {
         _;
     }
 
+    function getCount() public view returns (uint256) {
+        return auctions.length;
+    }
+
+    function getAuctionsOf(address _owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        uint256[] memory ownedAuctions = auctionOwner[_owner];
+        return ownedAuctions;
+    }
+
     function getAuctionById(uint256 _auctionId)
         public
         view

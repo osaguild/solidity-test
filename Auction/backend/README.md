@@ -35,3 +35,10 @@
   - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,001,"sample auction","hello auction",100,200).then(res=>{console.log(res.logs[0].args)})})` 
 - get auction by id
   - `AuctionRepository.deployed().then(instance=>{instance.getAuctionById(0).then(res=>{console.log(res)})})` 
+- add deed and auction
+  - `DeedRepository.deployed().then(instance=>{instance.registerDeed(002, "https://002.com/").then(res=>{console.log(res.logs[0].args);console.log(res.logs[1].args)})})`
+  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,002,"second auction","hi auction",100,200).then(res=>{console.log(res.logs[0].args)})})` 
+- get count
+  - `AuctionRepository.deployed().then(instance=>{instance.getCount().then(res=>{console.log(res)})})`
+- get owned auctions
+  - `AuctionRepository.deployed().then(instance=>{instance.getAuctionsOf(accounts[0]).then(res=>{console.log(res)})})`
