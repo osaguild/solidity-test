@@ -31,6 +31,11 @@
 ### test
 - call registerDeed
   - `DeedRepository.deployed().then(instance=>{instance.registerDeed(001, "https://001.com/").then(res=>{console.log(res.logs[0].args);console.log(res.logs[1].args)})})`
+- change owner of deedId 001
+  - `DeedRepository.deployed().then(instance=>{instance.transferFrom(accounts[0],AuctionRepository.address,001).then(address=>{console.log(address)})})`
+  - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
+  - `accounts[0]`
+  - `AuctionRepository.address`
 - call createAuction
   - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,001,"sample auction","hello auction",web3.utils.toWei('1','ether'),1743433200).then(res=>{console.log(res.logs[0].args)})})` 
 - get auction by id
@@ -56,3 +61,8 @@
 - get bid
   - `AuctionRepository.deployed().then(instance=>{instance.getBidsCount(0).then(res=>{console.log(res)})})`
   - `AuctionRepository.deployed().then(instance=>{instance.getCurrentBid(0).then(res=>{console.log(res)})})`
+- cancel auction id 0
+  - `AuctionRepository.deployed().then(instance=>{instance.cancelAuction(0).then(res=>{console.log(res.logs[0])})})`
+  - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
+  - `accounts[0]`
+  - `AuctionRepository.address`

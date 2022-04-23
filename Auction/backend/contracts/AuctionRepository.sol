@@ -33,11 +33,7 @@ contract AuctionRepository {
             _deedId
         );
 
-        require(deedOwner == msg.sender, "error");
-        /* todo: origin logic is below
-        emit Debug(deedOwner, address(this));
         require(deedOwner == address(this), "error");
-        */
         _;
     }
 
@@ -139,6 +135,33 @@ contract AuctionRepository {
         return true;
     }
 
+    function approveAndTransfer(
+        address _from,
+        address _to,
+        address _deedRepositoryAddress,
+        uint256 _deedId
+    ) internal returns (bool) {
+        DeedRepository remoteContract = DeedRepository(_deedRepositoryAddress);
+        remoteContract.approve(_to, _deedId);
+        remoteContract.transferFrom(_from, _to, _deedId);
+        return true;
+    }
+
+    function cancelAuction(uint256 _auctionId) public {
+        Auction memory myAuction = auctions[_auctionId];
+        if (
+            approveAndTransfer(
+                address(this),
+                myAuction.owner,
+                myAuction.deedRepositoryAddress,
+                myAuction.deedId
+            )
+        ) {
+            auctions[_auctionId].active = false;
+            emit AuctionCanceled(msg.sender, _auctionId);
+        }
+    }
+
     function bidOnAuction(uint256 _auctionId) external payable {
         uint256 ethAmountSent = msg.value;
         Auction memory myAuction = auctions[_auctionId];
@@ -177,5 +200,6 @@ contract AuctionRepository {
 
     event BidSuccess(address _from, uint256 _auctionId);
     event AuctionCreated(address _owner, uint256 _auctionId);
+    event AuctionCanceled(address _owner, uint256 _auctionId);
     event Debug(uint256 param1, uint256 param2);
 }
