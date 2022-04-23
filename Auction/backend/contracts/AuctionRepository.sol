@@ -48,6 +48,14 @@ contract AuctionRepository {
         return ownedAuctions;
     }
 
+    function getAuctionCountOfOwner(address _owner)
+        public
+        view
+        returns (uint256)
+    {
+        return auctionOwner[_owner].length;
+    }
+
     function getAuctionById(uint256 _auctionId)
         public
         view

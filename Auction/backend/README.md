@@ -42,3 +42,5 @@
   - `AuctionRepository.deployed().then(instance=>{instance.getCount().then(res=>{console.log(res)})})`
 - get owned auctions
   - `AuctionRepository.deployed().then(instance=>{instance.getAuctionsOf(accounts[0]).then(res=>{console.log(res)})})`
+- get owned auction counts
+  - `AuctionRepository.deployed().then(instance=>{instance.getAuctionCountOfOwner(accounts[0]).then(res=>{console.log(res)})})`
