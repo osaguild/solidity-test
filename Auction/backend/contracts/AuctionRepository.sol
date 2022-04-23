@@ -149,6 +149,17 @@ contract AuctionRepository {
 
     function cancelAuction(uint256 _auctionId) public {
         Auction memory myAuction = auctions[_auctionId];
+        uint256 bidsLength = auctionBids[_auctionId].length;
+
+        if (bidsLength > 0) {
+            Bid memory lastBid = auctionBids[_auctionId][bidsLength - 1];
+            lastBid.from.transfer(lastBid.amount);
+            /* todo: send does not work
+            if (!lastBid.from.send(lastBid.amount))
+                revert("refund to last bidder is failed");
+            */
+        }
+
         if (
             approveAndTransfer(
                 address(this),
