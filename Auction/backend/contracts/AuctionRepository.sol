@@ -124,6 +124,33 @@ contract AuctionRepository {
 
     function bidOnAuction(uint256 _auctionId) external payable {
         uint256 ethAmountSent = msg.value;
+        Auction memory myAuction = auctions[_auctionId];
+
+        if (myAuction.owner == msg.sender)
+            revert("owner cannot bid on own auction");
+
+        if (block.timestamp > myAuction.blockDeadline)
+            revert("auction is expired");
+
+        uint256 bidsLength = auctionBids[_auctionId].length;
+        uint256 tempAmount = myAuction.startPrice;
+        Bid memory lastBid;
+
+        if (bidsLength > 0) {
+            lastBid = auctionBids[_auctionId][bidsLength - 1];
+            tempAmount = lastBid.amount;
+        }
+
+        if (ethAmountSent <= tempAmount) revert("bid amount is too low");
+
+        if (bidsLength > 0) {
+            lastBid.from.transfer(lastBid.amount);
+            /* todo: send does not work
+            if (!lastBid.from.send(lastBid.amount))
+                revert("refund to last bidder is failed");
+            */
+        }
+
         Bid memory newBid;
         newBid.from = payable(msg.sender);
         newBid.amount = ethAmountSent;
@@ -133,5 +160,5 @@ contract AuctionRepository {
 
     event BidSuccess(address _from, uint256 _auctionId);
     event AuctionCreated(address _owner, uint256 _auctionId);
-    //event Debug(address _deedOwner, address _this);
+    event Debug(uint256 param1, uint256 param2);
 }
