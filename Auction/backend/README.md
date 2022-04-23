@@ -53,3 +53,6 @@
   - `web3.eth.getBalance(accounts[1])`
   - `web3.eth.getBalance(accounts[2])`
   - `web3.eth.getBalance(AuctionRepository.address)`
+- get bid
+  - `AuctionRepository.deployed().then(instance=>{instance.getBidsCount(0).then(res=>{console.log(res)})})`
+  - `AuctionRepository.deployed().then(instance=>{instance.getCurrentBid(0).then(res=>{console.log(res)})})`

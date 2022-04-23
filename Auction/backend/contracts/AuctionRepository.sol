@@ -45,6 +45,10 @@ contract AuctionRepository {
         return auctions.length;
     }
 
+    function getBidsCount(uint256 _auctionId) public view returns (uint256) {
+        return auctionBids[_auctionId].length;
+    }
+
     function getAuctionsOf(address _owner)
         public
         view
@@ -52,6 +56,19 @@ contract AuctionRepository {
     {
         uint256[] memory ownedAuctions = auctionOwner[_owner];
         return ownedAuctions;
+    }
+
+    function getCurrentBid(uint256 _auctionId)
+        public
+        view
+        returns (uint256, address)
+    {
+        uint256 bidsLength = auctionBids[_auctionId].length;
+        if (bidsLength > 0) {
+            Bid memory lastBid = auctionBids[_auctionId][bidsLength - 1];
+            return (lastBid.amount, lastBid.from);
+        }
+        return (uint256(0), address(0));
     }
 
     function getAuctionCountOfOwner(address _owner)
