@@ -35,6 +35,35 @@ contract AuctionRepository {
         _;
     }
 
+    function getAuctionById(uint256 _auctionId)
+        public
+        view
+        returns (
+            string memory name,
+            uint256 blockDeadline,
+            uint256 startPrice,
+            string memory metadata,
+            uint256 deedId,
+            address deedRepositoryAddress,
+            address owner,
+            bool active,
+            bool finalized
+        )
+    {
+        Auction memory auc = auctions[_auctionId];
+        return (
+            auc.name,
+            auc.blockDeadline,
+            auc.startPrice,
+            auc.metadata,
+            auc.deedId,
+            auc.deedRepositoryAddress,
+            auc.owner,
+            auc.active,
+            auc.finalized
+        );
+    }
+
     function createAuction(
         address _deedRepositoryAddress,
         uint256 _deedId,

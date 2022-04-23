@@ -30,6 +30,8 @@
 - edit 2_deploy_contract.js
 ### test
 - call registerDeed
-  - `DeedRepository.deployed().then(instance=>{instance.registerDeed(001, "https://001.com/").then(event=>{console.log(event)})})`
+  - `DeedRepository.deployed().then(instance=>{instance.registerDeed(001, "https://001.com/").then(res=>{console.log(res.logs[0].args);console.log(res.logs[1].args)})})`
 - call createAuction
-  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,001,"sample auction","hello auction",100,200).then(res=>{console.log(res)})})` 
+  - `AuctionRepository.deployed().then(instance=>{instance.createAuction(DeedRepository.address,001,"sample auction","hello auction",100,200).then(res=>{console.log(res.logs[0].args)})})` 
+- get auction by id
+  - `AuctionRepository.deployed().then(instance=>{instance.getAuctionById(0).then(res=>{console.log(res)})})` 
