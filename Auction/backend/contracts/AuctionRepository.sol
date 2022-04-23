@@ -5,7 +5,13 @@ import "./DeedRepository.sol";
 
 contract AuctionRepository {
     Auction[] public auctions;
+    mapping(uint256 => Bid[]) public auctionBids;
     mapping(address => uint256[]) public auctionOwner;
+
+    struct Bid {
+        address payable from;
+        uint256 amount;
+    }
 
     struct Auction {
         string name;
@@ -116,6 +122,16 @@ contract AuctionRepository {
         return true;
     }
 
+    function bidOnAuction(uint256 _auctionId) external payable {
+        uint256 ethAmountSent = msg.value;
+        Bid memory newBid;
+        newBid.from = payable(msg.sender);
+        newBid.amount = ethAmountSent;
+        auctionBids[_auctionId].push(newBid);
+        emit BidSuccess(msg.sender, _auctionId);
+    }
+
+    event BidSuccess(address _from, uint256 _auctionId);
     event AuctionCreated(address _owner, uint256 _auctionId);
     //event Debug(address _deedOwner, address _this);
 }
