@@ -31,7 +31,7 @@
 ### test
 - call registerDeed
   - `DeedRepository.deployed().then(instance=>{instance.registerDeed(001, "https://001.com/").then(res=>{console.log(res.logs[0].args);console.log(res.logs[1].args)})})`
-- change owner of deedId 001
+- change owner of deedId 001 accounts[0] to AuctionRepository
   - `DeedRepository.deployed().then(instance=>{instance.transferFrom(accounts[0],AuctionRepository.address,001).then(address=>{console.log(address)})})`
   - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
   - `accounts[0]`

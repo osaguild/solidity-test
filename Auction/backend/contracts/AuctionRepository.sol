@@ -25,6 +25,11 @@ contract AuctionRepository {
         bool finalized;
     }
 
+    modifier isOwner(uint256 _auctionId) {
+        require(auctions[_auctionId].owner == msg.sender);
+        _;
+    }
+
     modifier contractIsDeedOwner(
         address _deedRepositoryAddress,
         uint256 _deedId
@@ -147,7 +152,7 @@ contract AuctionRepository {
         return true;
     }
 
-    function cancelAuction(uint256 _auctionId) public {
+    function cancelAuction(uint256 _auctionId) public isOwner(_auctionId) {
         Auction memory myAuction = auctions[_auctionId];
         uint256 bidsLength = auctionBids[_auctionId].length;
 
@@ -177,14 +182,34 @@ contract AuctionRepository {
         Auction memory myAuction = auctions[_auctionId];
         uint256 bidsLength = auctionBids[_auctionId].length;
 
-        Bid memory lastBid = auctionBids[_auctionId][bidsLength - 1];
+        /* todo: temporary commnent out 
+        if (block.timestamp < myAuction.blockDeadline) revert("auction is expired");
+        */
 
-        approveAndTransfer(
-            address(this),
-            lastBid.from,
-            myAuction.deedRepositoryAddress,
-            myAuction.deedId
-        );
+        if (bidsLength == 0) {
+            cancelAuction(_auctionId);
+        } else {
+            Bid memory lastBid = auctionBids[_auctionId][bidsLength - 1];
+
+            myAuction.owner.transfer(lastBid.amount);
+            /* todo: send does not work
+            if (!lastBid.from.send(lastBid.amount))
+                revert("refund to last bidder is failed");
+            */
+
+            if (
+                approveAndTransfer(
+                    address(this),
+                    lastBid.from,
+                    myAuction.deedRepositoryAddress,
+                    myAuction.deedId
+                )
+            ) {
+                auctions[_auctionId].active = false;
+                auctions[_auctionId].finalized = true;
+                emit AuctionFinalized(msg.sender, _auctionId);
+            }
+        }
     }
 
     function bidOnAuction(uint256 _auctionId) external payable {
@@ -226,5 +251,6 @@ contract AuctionRepository {
     event BidSuccess(address _from, uint256 _auctionId);
     event AuctionCreated(address _owner, uint256 _auctionId);
     event AuctionCanceled(address _owner, uint256 _auctionId);
+    event AuctionFinalized(address _owner, uint256 _auctionId);
     event Debug(uint256 param1, uint256 param2);
 }
