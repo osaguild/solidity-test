@@ -49,11 +49,11 @@
   - `AuctionRepository.deployed().then(instance=>{instance.getAuctionsOf(accounts[0]).then(res=>{console.log(res)})})`
 - get owned auction counts
   - `AuctionRepository.deployed().then(instance=>{instance.getAuctionCountOfOwner(accounts[0]).then(res=>{console.log(res)})})`
-- call bid 200 eth from accounts[1]
+- call bid 2 eth from accounts[1]
   - `AuctionRepository.deployed().then(instance=>{instance.bidOnAuction(0,{from:accounts[1],value:web3.utils.toWei('2','ether')}).then(res=>{console.log(res.logs[0].args)})})`
   - `web3.eth.getBalance(accounts[1])`
   - `web3.eth.getBalance(AuctionRepository.address)`
-- call bid 300 eth from accounts[2]
+- call bid 3 eth from accounts[2]
   - `AuctionRepository.deployed().then(instance=>{instance.bidOnAuction(0,{from:accounts[2],value:web3.utils.toWei('3','ether')}).then(res=>{console.log(res.logs[0])})})`
   - `web3.eth.getBalance(accounts[1])`
   - `web3.eth.getBalance(accounts[2])`
