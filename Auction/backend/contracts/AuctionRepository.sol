@@ -173,6 +173,20 @@ contract AuctionRepository {
         }
     }
 
+    function finalizeAuction(uint256 _auctionId) public {
+        Auction memory myAuction = auctions[_auctionId];
+        uint256 bidsLength = auctionBids[_auctionId].length;
+
+        Bid memory lastBid = auctionBids[_auctionId][bidsLength - 1];
+
+        approveAndTransfer(
+            address(this),
+            lastBid.from,
+            myAuction.deedRepositoryAddress,
+            myAuction.deedId
+        );
+    }
+
     function bidOnAuction(uint256 _auctionId) external payable {
         uint256 ethAmountSent = msg.value;
         Auction memory myAuction = auctions[_auctionId];

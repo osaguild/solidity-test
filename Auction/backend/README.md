@@ -66,3 +66,8 @@
   - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
   - `accounts[0]`
   - `AuctionRepository.address`
+- finalize auction id 0
+  - `AuctionRepository.deployed().then(instance=>{instance.finalizeAuction(0).then(res=>{console.log(res.logs[0])})})`
+  - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
+  - `accounts[2]`
+  - `AuctionRepository.address`
