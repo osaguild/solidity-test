@@ -7,6 +7,11 @@
 <script>
 export default {
   name: 'App',
+  data() {
+    return {
+      currentAccount: null,
+    };
+  },
   mounted: function () {
     this.checkIfWalletIsConnected();
   },
@@ -18,7 +23,7 @@ export default {
           alert("Make sure you have metamask!");
           return;
         } else {
-          console.log("We have the ethereum object", ethereum);
+          console.log("We have the ethereum object");
         }
         const accounts = await ethereum.request({ method: "eth_accounts" });
         if (accounts.length !== 0) {
