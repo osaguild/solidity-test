@@ -71,3 +71,16 @@
   - `DeedRepository.deployed().then(instance=>{instance.ownerOf(001).then(address=>{console.log(address)})})`
   - `accounts[2]`
   - `AuctionRepository.address`
+
+## deploy on ganache
+- launch ganache and create workspace
+- change server port to `7545`
+- `truffle compile`
+- `truffle migrate --network development`
+
+## create metamask account
+- copy mnemonic from truffle. mnemonic like blow
+  - `ordinary autumn able spend bounce wasp maximum opinion rent fox celery behave`
+- import account to metamask
+  - open metamask and click `forgot password?`
+  - paste mnemonic and set new password and click `restore`
