@@ -5,6 +5,9 @@
     <button class="primaryButton" @click="getInfo">Get some info</button>
     <button class="primaryButton" @click="readContract">Read Contract</button>
     <button class="primaryButton" @click="writeContract">Write Contract</button>
+    <button class="primaryButton" @click="deedRegisteredEvent">
+      DeedRegistered Event
+    </button>
   </div>
 </template>
 
@@ -99,10 +102,25 @@ export default {
           provider
         );
         const deedWithSigner = deedContract.connect(signer);
-        const tx = await deedWithSigner.registerDeed("002", "https://002.com/");
-        console.log(tx);
+        const tx = await deedWithSigner.registerDeed("003", "https://003.com/");
+        console.log("transaction", tx);
       } catch (error) {
         console.log("failed to send transaction", error);
+      }
+    },
+    deedRegisteredEvent: async function () {
+      try {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const deedContract = await new ethers.Contract(
+          this.deedAddress,
+          this.deedAbi,
+          provider
+        );
+        deedContract.on("DeedRegistered", (by, tokenId) => {
+          console.log("DeedRegistered", by, tokenId.toString());
+        });
+      } catch (error) {
+        console.log("failed to listening event", error);
       }
     },
   },
